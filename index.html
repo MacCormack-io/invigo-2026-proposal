@@ -6,47 +6,46 @@
     <title>Invigo Retail · 2026</title>
     <link rel="icon" href="https://app.invigoretail.com/favicon.ico" type="image/x-icon">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap');
         *{margin:0;padding:0;box-sizing:border-box}
-        body{font-family:'Inter',sans-serif;background:#0a0a1a;overflow:hidden;height:100vh}
+        body{font-family:'Inter',sans-serif;background:#141414;overflow:hidden;height:100vh;color:#fafafa}
 
         /* PASSWORD GATE */
-        #gate{position:fixed;inset:0;background:#0a0a1a;z-index:1000;display:flex;align-items:center;justify-content:center}
+        #gate{position:fixed;inset:0;background:#141414;z-index:1000;display:flex;align-items:center;justify-content:center}
         #gate.hidden{display:none}
         #gate-box{text-align:center;max-width:360px}
-        #gate-box h2{font-size:28px;font-weight:800;letter-spacing:-1px;color:#fff;margin-bottom:8px}
-        #gate-box p{font-size:14px;color:#64748b;margin-bottom:28px}
-        #gate-input{width:100%;padding:14px 20px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:10px;color:#fff;font-family:'Inter',sans-serif;font-size:15px;outline:none;text-align:center;letter-spacing:2px}
-        #gate-input:focus{border-color:#818cf8}
-        #gate-input::placeholder{color:#475569;letter-spacing:0}
+        #gate-box h2{font-family:'Space Grotesk',sans-serif;font-size:28px;font-weight:700;letter-spacing:-1px;color:#fff;margin-bottom:8px;background:none;-webkit-text-fill-color:#fff}
+        #gate-box p{font-size:14px;color:#a3a3a3;margin-bottom:28px}
+        #gate-input{width:100%;padding:14px 20px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.12);border-radius:10px;color:#fff;font-family:'Inter',sans-serif;font-size:15px;outline:none;text-align:center;letter-spacing:2px}
+        #gate-input:focus{border-color:#3366FF}
+        #gate-input::placeholder{color:#525252;letter-spacing:0}
         #gate-error{font-size:12px;color:#ef4444;margin-top:12px;opacity:0;transition:opacity .2s}
         #gate-error.show{opacity:1}
-        #gate-hint{font-size:11px;color:#334155;margin-top:20px}
 
         /* SLIDE ENGINE */
         .deck{display:flex;transition:transform .4s ease;height:100vh;width:900vw}
-        .slide{width:100vw;height:100vh;flex-shrink:0;display:flex;align-items:center;justify-content:center;padding:80px 120px;background:#0a0a1a;color:#fff}
+        .slide{width:100vw;height:100vh;flex-shrink:0;display:flex;align-items:center;justify-content:center;padding:80px 120px;background:#141414;color:#fafafa}
         .slide-content{max-width:960px;width:100%}
 
-        /* TYPE — consistent scale */
-        h1{font-size:54px;font-weight:900;letter-spacing:-2.5px;line-height:1.08;margin-bottom:20px}
-        h2{font-size:40px;font-weight:800;letter-spacing:-1.5px;line-height:1.12;margin-bottom:16px}
-        .sub{font-size:18px;line-height:1.7;color:#94a3b8;max-width:600px}
-        .tag{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2.5px;margin-bottom:20px;display:block;color:#818cf8}
+        /* TYPE — Invigo scale: Space Grotesk headings, Inter body */
+        h1{font-family:'Space Grotesk',sans-serif;font-size:54px;font-weight:700;letter-spacing:-2px;line-height:1.08;margin-bottom:20px}
+        h2{font-family:'Space Grotesk',sans-serif;font-size:40px;font-weight:700;letter-spacing:-1.5px;line-height:1.12;margin-bottom:16px}
+        .sub{font-size:18px;line-height:1.7;color:#a3a3a3;max-width:600px;font-weight:400}
+        .tag{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:2.5px;margin-bottom:20px;display:block;color:#3366FF}
         .tag-muted{color:rgba(255,255,255,.3)}
-        .gradient{background:linear-gradient(135deg,#fff,#a5b4fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .gradient{background:linear-gradient(135deg,#fff,#00FFAA);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 
-        /* CARDS — one style everywhere */
-        .card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:28px}
-        .card-hi{background:rgba(79,70,229,.08);border:1px solid rgba(129,140,248,.15);border-radius:14px;padding:28px}
-        .card-title{font-size:15px;font-weight:700;color:#fff;margin-bottom:8px}
-        .card-text{font-size:13px;color:#94a3b8;line-height:1.7}
+        /* CARDS — Invigo dark style */
+        .card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:28px}
+        .card-hi{background:rgba(51,102,255,.06);border:1px solid rgba(51,102,255,.15);border-radius:12px;padding:28px}
+        .card-title{font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;color:#fff;margin-bottom:8px}
+        .card-text{font-size:13px;color:#a3a3a3;line-height:1.7}
 
         /* WEEK */
         .wr{display:flex;align-items:center;padding:18px 0;border-bottom:1px solid rgba(255,255,255,.06)}
         .wr:last-child{border:none}
-        .wr-day{width:110px;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#818cf8;flex-shrink:0}
-        .wr-what{flex:1;font-size:15px;color:#e2e8f0}
+        .wr-day{width:110px;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:#3366FF;flex-shrink:0}
+        .wr-what{flex:1;font-size:15px;color:#e5e5e5}
         .wr-who{width:130px;text-align:right;font-size:13px;color:rgba(255,255,255,.25);flex-shrink:0}
 
         /* NAV */
@@ -107,22 +106,22 @@
                     </div>
                 </div>
                 <div class="card-hi">
-                    <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:#818cf8;margin-bottom:16px">Your AI-powered team</div>
+                    <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:#3366FF;margin-bottom:16px">Your AI-powered team</div>
                     <div style="display:flex;align-items:flex-end;gap:4px;height:80px;margin-bottom:12px">
-                        <div style="flex:1;background:#4f46e5;border-radius:3px 3px 0 0;height:35%"></div>
-                        <div style="flex:1;background:#4f46e5;border-radius:3px 3px 0 0;height:45%"></div>
-                        <div style="flex:1;background:#4f46e5;border-radius:3px 3px 0 0;height:55%"></div>
-                        <div style="flex:1;background:#4f46e5;border-radius:3px 3px 0 0;height:62%"></div>
-                        <div style="flex:1;background:#818cf8;border-radius:3px 3px 0 0;height:70%"></div>
-                        <div style="flex:1;background:#818cf8;border-radius:3px 3px 0 0;height:76%"></div>
-                        <div style="flex:1;background:#818cf8;border-radius:3px 3px 0 0;height:82%"></div>
-                        <div style="flex:1;background:#a5b4fc;border-radius:3px 3px 0 0;height:88%"></div>
-                        <div style="flex:1;background:#a5b4fc;border-radius:3px 3px 0 0;height:93%"></div>
-                        <div style="flex:1;background:#a5b4fc;border-radius:3px 3px 0 0;height:98%"></div>
+                        <div style="flex:1;background:#2255DD;border-radius:3px 3px 0 0;height:35%"></div>
+                        <div style="flex:1;background:#2255DD;border-radius:3px 3px 0 0;height:45%"></div>
+                        <div style="flex:1;background:#2255DD;border-radius:3px 3px 0 0;height:55%"></div>
+                        <div style="flex:1;background:#2255DD;border-radius:3px 3px 0 0;height:62%"></div>
+                        <div style="flex:1;background:#3366FF;border-radius:3px 3px 0 0;height:70%"></div>
+                        <div style="flex:1;background:#3366FF;border-radius:3px 3px 0 0;height:76%"></div>
+                        <div style="flex:1;background:#3366FF;border-radius:3px 3px 0 0;height:82%"></div>
+                        <div style="flex:1;background:#5588FF;border-radius:3px 3px 0 0;height:88%"></div>
+                        <div style="flex:1;background:#5588FF;border-radius:3px 3px 0 0;height:93%"></div>
+                        <div style="flex:1;background:#5588FF;border-radius:3px 3px 0 0;height:98%"></div>
                     </div>
                     <div style="display:flex;justify-content:space-between;align-items:baseline">
                         <span style="font-size:9px;color:#475569">Sprint 1</span>
-                        <span style="font-size:18px;font-weight:800;color:#818cf8">~35 tickets/sprint</span>
+                        <span style="font-size:18px;font-weight:800;color:#3366FF">~35 tickets/sprint</span>
                         <span style="font-size:9px;color:#475569">Sprint 10</span>
                     </div>
                 </div>
@@ -130,21 +129,21 @@
 
             <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px">
                 <div class="card" style="padding:20px;text-align:center">
-                    <div style="font-size:28px;font-weight:900;color:#818cf8;margin-bottom:6px">Cursor</div>
+                    <div style="font-size:28px;font-weight:900;color:#3366FF;margin-bottom:6px">Cursor</div>
                     <div style="font-size:12px;color:#64748b">AI-native IDE. Code generation, refactoring, and debugging at machine speed.</div>
                 </div>
                 <div class="card" style="padding:20px;text-align:center">
-                    <div style="font-size:28px;font-weight:900;color:#818cf8;margin-bottom:6px">Claude Code</div>
+                    <div style="font-size:28px;font-weight:900;color:#3366FF;margin-bottom:6px">Claude Code</div>
                     <div style="font-size:12px;color:#64748b">Autonomous coding agent. Full features shipped from a single prompt.</div>
                 </div>
                 <div class="card" style="padding:20px;text-align:center">
-                    <div style="font-size:28px;font-weight:900;color:#818cf8;margin-bottom:6px">Copilot</div>
+                    <div style="font-size:28px;font-weight:900;color:#3366FF;margin-bottom:6px">Copilot</div>
                     <div style="font-size:12px;color:#64748b">Inline AI autocomplete. Every line of code has a co-pilot writing alongside.</div>
                 </div>
             </div>
 
             <div style="margin-top:20px;text-align:center">
-                <span style="font-size:15px;font-weight:600;color:#a5b4fc">You're not paying for hours. You're paying for output.</span>
+                <span style="font-size:15px;font-weight:600;color:#00FFAA">You're not paying for hours. You're paying for output.</span>
             </div>
         </div>
     </div>
@@ -156,10 +155,10 @@
             <h2 class="gradient">Four people. One product.</h2>
             <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:16px;margin-top:32px">
                 <div class="card" style="position:relative;overflow:hidden">
-                    <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#4f46e5,#818cf8)"></div>
+                    <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#2255DD,#3366FF)"></div>
                     <div style="font-size:16px;font-weight:800;color:#fff">Alan</div>
-                    <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:#818cf8;margin-top:4px;margin-bottom:14px">CTO</div>
-                    <div style="font-size:13px;color:#94a3b8;line-height:1.8">
+                    <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:#3366FF;margin-top:4px;margin-bottom:14px">CTO</div>
+                    <div style="font-size:13px;color:#a3a3a3;line-height:1.8">
                         <div>Weekly 1h strategy call</div>
                         <div>Architecture decisions</div>
                         <div>CV &amp; AI guardrails</div>
@@ -167,10 +166,10 @@
                     </div>
                 </div>
                 <div class="card" style="position:relative;overflow:hidden">
-                    <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#818cf8,#a78bfa)"></div>
+                    <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#3366FF,#5588FF)"></div>
                     <div style="font-size:16px;font-weight:800;color:#fff">Cristian</div>
-                    <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:#818cf8;margin-top:4px;margin-bottom:14px">TECH LEAD</div>
-                    <div style="font-size:13px;color:#94a3b8;line-height:1.8">
+                    <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:#3366FF;margin-top:4px;margin-bottom:14px">TECH LEAD</div>
+                    <div style="font-size:13px;color:#a3a3a3;line-height:1.8">
                         <div>Code review every deploy</div>
                         <div>Quality standards</div>
                         <div>Architecture review</div>
@@ -178,10 +177,10 @@
                     </div>
                 </div>
                 <div class="card-hi" style="position:relative;overflow:hidden">
-                    <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#4f46e5,#06b6d4)"></div>
+                    <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#2255DD,#00FFAA)"></div>
                     <div style="font-size:16px;font-weight:800;color:#fff">Developer</div>
-                    <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:#818cf8;margin-top:4px;margin-bottom:14px">FULL-TIME</div>
-                    <div style="font-size:13px;color:#cbd5e1;line-height:1.8">
+                    <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:#3366FF;margin-top:4px;margin-bottom:14px">FULL-TIME</div>
+                    <div style="font-size:13px;color:#d4d4d4;line-height:1.8">
                         <div>100% dedicated to Invigo</div>
                         <div>AI-accelerated (Cursor, Claude)</div>
                         <div>Features, fixes, detection</div>
@@ -191,8 +190,8 @@
                 <div class="card" style="position:relative;overflow:hidden">
                     <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#06b6d4,#22d3ee)"></div>
                     <div style="font-size:16px;font-weight:800;color:#fff">PM</div>
-                    <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:#818cf8;margin-top:4px;margin-bottom:14px">10 HRS/WEEK</div>
-                    <div style="font-size:13px;color:#94a3b8;line-height:1.8">
+                    <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:#3366FF;margin-top:4px;margin-bottom:14px">10 HRS/WEEK</div>
+                    <div style="font-size:13px;color:#a3a3a3;line-height:1.8">
                         <div>Manages everything in Linear</div>
                         <div>Sprints, standups, backlog</div>
                         <div>Weekly written report</div>
@@ -202,15 +201,15 @@
             </div>
             <div style="margin-top:16px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px">
                 <div class="card" style="padding:14px 20px;text-align:center">
-                    <div style="font-size:10px;font-weight:700;color:#818cf8;letter-spacing:1px">ALL TOOLING INCLUDED</div>
+                    <div style="font-size:10px;font-weight:700;color:#3366FF;letter-spacing:1px">ALL TOOLING INCLUDED</div>
                     <div style="font-size:12px;color:#64748b;margin-top:4px">Linear · Sentry · Grafana · CI/CD</div>
                 </div>
                 <div class="card" style="padding:14px 20px;text-align:center">
-                    <div style="font-size:10px;font-weight:700;color:#818cf8;letter-spacing:1px">MONITORING INCLUDED</div>
+                    <div style="font-size:10px;font-weight:700;color:#3366FF;letter-spacing:1px">MONITORING INCLUDED</div>
                     <div style="font-size:12px;color:#64748b;margin-top:4px">Sentry errors · Grafana dashboards · Slack alerts</div>
                 </div>
                 <div class="card" style="padding:14px 20px;text-align:center">
-                    <div style="font-size:10px;font-weight:700;color:#818cf8;letter-spacing:1px">ON-SITE EVERY 6 MONTHS</div>
+                    <div style="font-size:10px;font-weight:700;color:#3366FF;letter-spacing:1px">ON-SITE EVERY 6 MONTHS</div>
                     <div style="font-size:12px;color:#64748b;margin-top:4px">New York · Full IP ownership · Always yours</div>
                 </div>
             </div>
@@ -225,27 +224,27 @@
 
             <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr 1fr 1fr;gap:10px;margin-top:28px;margin-bottom:28px">
                 <div class="card" style="padding:14px 16px;text-align:center">
-                    <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#818cf8;margin-bottom:6px">Sentry</div>
+                    <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#3366FF;margin-bottom:6px">Sentry</div>
                     <div style="font-size:11px;color:#64748b;line-height:1.5">CV shelf monitoring, OOS detection, alerts</div>
                 </div>
                 <div class="card" style="padding:14px 16px;text-align:center">
-                    <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#818cf8;margin-bottom:6px">LUMA Shelf</div>
+                    <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#3366FF;margin-bottom:6px">LUMA Shelf</div>
                     <div style="font-size:11px;color:#64748b;line-height:1.5">LED navigation, engagement, sensors</div>
                 </div>
                 <div class="card" style="padding:14px 16px;text-align:center">
-                    <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#818cf8;margin-bottom:6px">Vending Ops</div>
+                    <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#3366FF;margin-bottom:6px">Vending Ops</div>
                     <div style="font-size:11px;color:#64748b;line-height:1.5">Vision capture, hardware health</div>
                 </div>
                 <div class="card" style="padding:14px 16px;text-align:center">
-                    <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#818cf8;margin-bottom:6px">Planogram</div>
+                    <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#3366FF;margin-bottom:6px">Planogram</div>
                     <div style="font-size:11px;color:#64748b;line-height:1.5">Zone compliance, drift detection</div>
                 </div>
                 <div class="card" style="padding:14px 16px;text-align:center">
-                    <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#818cf8;margin-bottom:6px">Multi-Org</div>
+                    <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#3366FF;margin-bottom:6px">Multi-Org</div>
                     <div style="font-size:11px;color:#64748b;line-height:1.5">RBAC, org switching, enterprise</div>
                 </div>
                 <div class="card" style="padding:14px 16px;text-align:center">
-                    <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#818cf8;margin-bottom:6px">Mobile</div>
+                    <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#3366FF;margin-bottom:6px">Mobile</div>
                     <div style="font-size:11px;color:#64748b;line-height:1.5">Field app, restock, bulk ops</div>
                 </div>
             </div>
@@ -258,8 +257,8 @@
                     <div class="card-text">Audit inference pipeline. Fix timeout sources. Target: cut <span style="font-family:monospace;color:#fde68a">Detection timeout</span> errors by 50%.</div>
                 </div>
                 <div class="card" style="padding:22px;position:relative;overflow:hidden">
-                    <div style="position:absolute;top:0;left:0;bottom:0;width:3px;background:linear-gradient(to bottom,#818cf8,#6366f1)"></div>
-                    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#818cf8;margin-bottom:8px">Planogram Compliance</div>
+                    <div style="position:absolute;top:0;left:0;bottom:0;width:3px;background:linear-gradient(to bottom,#3366FF,#2255DD)"></div>
+                    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#3366FF;margin-bottom:8px">Planogram Compliance</div>
                     <div class="card-text">Improve zone coverage. Add automated drift alerts — catch <span style="font-family:monospace;color:#fde68a">PlanogramDrift</span> before clients see it.</div>
                 </div>
                 <div class="card" style="padding:22px;position:relative;overflow:hidden">
@@ -287,7 +286,7 @@
             <div class="card" style="padding:0;overflow:hidden;margin-bottom:14px">
                 <div style="padding:10px 20px;border-bottom:1px solid rgba(255,255,255,.05);display:flex;align-items:center;gap:10px">
                     <div style="width:16px;height:16px;background:#f46800;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:900;color:#fff">G</div>
-                    <span style="font-size:11px;font-weight:700;color:#e2e8f0">Grafana</span>
+                    <span style="font-size:11px;font-weight:700;color:#e5e5e5">Grafana</span>
                     <span style="font-size:10px;color:#64748b">Platform Health</span>
                     <span style="margin-left:auto;font-size:10px;color:#22c55e;font-weight:600">&#9679; Live</span>
                 </div>
@@ -295,9 +294,9 @@
                     <div style="background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.04);border-radius:8px;padding:12px">
                         <div style="font-size:8px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">Active Users</div>
                         <div style="display:flex;align-items:flex-end;gap:2px;height:32px;margin-bottom:4px">
-                            <div style="flex:1;background:#818cf8;border-radius:2px 2px 0 0;height:30%"></div><div style="flex:1;background:#818cf8;border-radius:2px 2px 0 0;height:42%"></div><div style="flex:1;background:#818cf8;border-radius:2px 2px 0 0;height:55%"></div><div style="flex:1;background:#818cf8;border-radius:2px 2px 0 0;height:50%"></div><div style="flex:1;background:#818cf8;border-radius:2px 2px 0 0;height:65%"></div><div style="flex:1;background:#818cf8;border-radius:2px 2px 0 0;height:72%"></div><div style="flex:1;background:#818cf8;border-radius:2px 2px 0 0;height:68%"></div><div style="flex:1;background:#a5b4fc;border-radius:2px 2px 0 0;height:80%"></div><div style="flex:1;background:#a5b4fc;border-radius:2px 2px 0 0;height:88%"></div><div style="flex:1;background:#a5b4fc;border-radius:2px 2px 0 0;height:92%"></div><div style="flex:1;background:#a5b4fc;border-radius:2px 2px 0 0;height:95%"></div>
+                            <div style="flex:1;background:#3366FF;border-radius:2px 2px 0 0;height:30%"></div><div style="flex:1;background:#3366FF;border-radius:2px 2px 0 0;height:42%"></div><div style="flex:1;background:#3366FF;border-radius:2px 2px 0 0;height:55%"></div><div style="flex:1;background:#3366FF;border-radius:2px 2px 0 0;height:50%"></div><div style="flex:1;background:#3366FF;border-radius:2px 2px 0 0;height:65%"></div><div style="flex:1;background:#3366FF;border-radius:2px 2px 0 0;height:72%"></div><div style="flex:1;background:#3366FF;border-radius:2px 2px 0 0;height:68%"></div><div style="flex:1;background:#5588FF;border-radius:2px 2px 0 0;height:80%"></div><div style="flex:1;background:#5588FF;border-radius:2px 2px 0 0;height:88%"></div><div style="flex:1;background:#5588FF;border-radius:2px 2px 0 0;height:92%"></div><div style="flex:1;background:#5588FF;border-radius:2px 2px 0 0;height:95%"></div>
                         </div>
-                        <div style="font-size:18px;font-weight:800;color:#818cf8">1,247</div>
+                        <div style="font-size:18px;font-weight:800;color:#3366FF">1,247</div>
                     </div>
                     <div style="background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.04);border-radius:8px;padding:12px">
                         <div style="font-size:8px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">Uptime (30d)</div>
@@ -327,7 +326,7 @@
             <div class="card" style="padding:0;overflow:hidden;margin-bottom:14px">
                 <div style="padding:10px 20px;border-bottom:1px solid rgba(255,255,255,.05);display:flex;align-items:center;gap:10px">
                     <div style="width:16px;height:16px;background:#f46800;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:900;color:#fff">G</div>
-                    <span style="font-size:11px;font-weight:700;color:#e2e8f0">Grafana</span>
+                    <span style="font-size:11px;font-weight:700;color:#e5e5e5">Grafana</span>
                     <span style="font-size:10px;color:#64748b">Business KPIs · Invigo Sentry</span>
                 </div>
                 <div style="padding:16px;display:grid;grid-template-columns:1fr 1fr 1fr 1fr 1fr;gap:12px">
@@ -348,9 +347,9 @@
                     <div style="background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.04);border-radius:8px;padding:12px">
                         <div style="font-size:8px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">Planogram Compliance</div>
                         <div style="display:flex;align-items:flex-end;gap:2px;height:32px;margin-bottom:4px">
-                            <div style="flex:1;background:#818cf8;border-radius:2px 2px 0 0;height:75%"></div><div style="flex:1;background:#818cf8;border-radius:2px 2px 0 0;height:80%"></div><div style="flex:1;background:#818cf8;border-radius:2px 2px 0 0;height:84%"></div><div style="flex:1;background:#818cf8;border-radius:2px 2px 0 0;height:86%"></div><div style="flex:1;background:#818cf8;border-radius:2px 2px 0 0;height:88%"></div><div style="flex:1;background:#818cf8;border-radius:2px 2px 0 0;height:90%"></div><div style="flex:1;background:#818cf8;border-radius:2px 2px 0 0;height:91%"></div><div style="flex:1;background:#818cf8;border-radius:2px 2px 0 0;height:93%"></div>
+                            <div style="flex:1;background:#3366FF;border-radius:2px 2px 0 0;height:75%"></div><div style="flex:1;background:#3366FF;border-radius:2px 2px 0 0;height:80%"></div><div style="flex:1;background:#3366FF;border-radius:2px 2px 0 0;height:84%"></div><div style="flex:1;background:#3366FF;border-radius:2px 2px 0 0;height:86%"></div><div style="flex:1;background:#3366FF;border-radius:2px 2px 0 0;height:88%"></div><div style="flex:1;background:#3366FF;border-radius:2px 2px 0 0;height:90%"></div><div style="flex:1;background:#3366FF;border-radius:2px 2px 0 0;height:91%"></div><div style="flex:1;background:#3366FF;border-radius:2px 2px 0 0;height:93%"></div>
                         </div>
-                        <div style="font-size:18px;font-weight:800;color:#818cf8">93%</div>
+                        <div style="font-size:18px;font-weight:800;color:#3366FF">93%</div>
                     </div>
                     <div style="background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.04);border-radius:8px;padding:12px">
                         <div style="font-size:8px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">Detection Fails</div>
@@ -373,10 +372,10 @@
             <div class="card" style="padding:0;overflow:hidden">
                 <div style="padding:10px 20px;border-bottom:1px solid rgba(255,255,255,.05);display:flex;align-items:center;gap:10px">
                     <div style="width:16px;height:16px;background:#362d59;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:900;color:#fff">S</div>
-                    <span style="font-size:11px;font-weight:700;color:#e2e8f0">Sentry</span>
+                    <span style="font-size:11px;font-weight:700;color:#e5e5e5">Sentry</span>
                     <span style="font-size:10px;color:#64748b">Error Tracking · Last 24h</span>
                     <span style="margin-left:auto;display:flex;align-items:center;gap:12px">
-                        <span style="font-size:10px;color:#94a3b8">3 issues</span>
+                        <span style="font-size:10px;color:#a3a3a3">3 issues</span>
                         <span style="font-size:10px;color:#22c55e;font-weight:600">&#8595; 96% events</span>
                     </span>
                 </div>
@@ -440,46 +439,46 @@
                 </div>
 
                 <div style="display:flex;align-items:center;justify-content:center">
-                    <div style="font-size:24px;color:#4f46e5">&#8594;</div>
+                    <div style="font-size:24px;color:#3366FF">&#8594;</div>
                 </div>
 
                 <!-- YOUR TEAM -->
                 <div class="card-hi" style="padding:32px;position:relative;overflow:hidden;border-width:2px">
-                    <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#4f46e5,#818cf8,#a78bfa)"></div>
-                    <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:#818cf8;margin-bottom:20px">Your team</div>
+                    <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#2255DD,#3366FF,#5588FF)"></div>
+                    <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:#3366FF;margin-bottom:20px">Your team</div>
                     <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:4px">
                         <span style="font-size:50px;font-weight:900;color:#fff;letter-spacing:-3px;line-height:1">$7,550</span>
-                        <span style="font-size:16px;font-weight:500;color:#818cf8">/mo</span>
+                        <span style="font-size:16px;font-weight:500;color:#3366FF">/mo</span>
                     </div>
-                    <div style="font-size:13px;color:#94a3b8;margin-bottom:24px">~$34/hr effective rate</div>
+                    <div style="font-size:13px;color:#a3a3a3;margin-bottom:24px">~$34/hr effective rate</div>
                     <div style="display:flex;flex-direction:column;gap:12px">
-                        <div style="display:flex;align-items:center;gap:10px;font-size:14px;color:#e2e8f0"><span style="color:#22c55e;font-size:14px">&#10003;</span> Full-time developer</div>
-                        <div style="display:flex;align-items:center;gap:10px;font-size:14px;color:#e2e8f0"><span style="color:#22c55e;font-size:14px">&#10003;</span> Project manager (10h/week)</div>
-                        <div style="display:flex;align-items:center;gap:10px;font-size:14px;color:#e2e8f0"><span style="color:#22c55e;font-size:14px">&#10003;</span> CTO + Tech Lead</div>
-                        <div style="display:flex;align-items:center;gap:10px;font-size:14px;color:#e2e8f0"><span style="color:#22c55e;font-size:14px">&#10003;</span> Sentry + Grafana + tooling</div>
-                        <div style="display:flex;align-items:center;gap:10px;font-size:14px;color:#e2e8f0"><span style="color:#22c55e;font-size:14px">&#10003;</span> Weekly reports + on-site every 6 months</div>
+                        <div style="display:flex;align-items:center;gap:10px;font-size:14px;color:#e5e5e5"><span style="color:#22c55e;font-size:14px">&#10003;</span> Full-time developer</div>
+                        <div style="display:flex;align-items:center;gap:10px;font-size:14px;color:#e5e5e5"><span style="color:#22c55e;font-size:14px">&#10003;</span> Project manager (10h/week)</div>
+                        <div style="display:flex;align-items:center;gap:10px;font-size:14px;color:#e5e5e5"><span style="color:#22c55e;font-size:14px">&#10003;</span> CTO + Tech Lead</div>
+                        <div style="display:flex;align-items:center;gap:10px;font-size:14px;color:#e5e5e5"><span style="color:#22c55e;font-size:14px">&#10003;</span> Sentry + Grafana + tooling</div>
+                        <div style="display:flex;align-items:center;gap:10px;font-size:14px;color:#e5e5e5"><span style="color:#22c55e;font-size:14px">&#10003;</span> Weekly reports + on-site every 6 months</div>
                     </div>
                     <div style="margin-top:24px;padding-top:16px;border-top:1px solid rgba(255,255,255,.08)">
-                        <div style="font-size:12px;color:#94a3b8">Month-to-month. Cancel anytime. No lock-in.</div>
+                        <div style="font-size:12px;color:#a3a3a3">Month-to-month. Cancel anytime. No lock-in.</div>
                     </div>
                 </div>
             </div>
 
             <div style="margin-top:24px;display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:12px">
                 <div class="card" style="padding:16px 20px;text-align:center">
-                    <div style="font-size:22px;font-weight:900;color:#818cf8">+$4</div>
+                    <div style="font-size:22px;font-weight:900;color:#3366FF">+$4</div>
                     <div style="font-size:11px;color:#64748b;margin-top:4px">per hour difference</div>
                 </div>
                 <div class="card" style="padding:16px 20px;text-align:center">
-                    <div style="font-size:22px;font-weight:900;color:#818cf8">5x</div>
+                    <div style="font-size:22px;font-weight:900;color:#3366FF">5x</div>
                     <div style="font-size:11px;color:#64748b;margin-top:4px">more people on your product</div>
                 </div>
                 <div class="card" style="padding:16px 20px;text-align:center">
-                    <div style="font-size:22px;font-weight:900;color:#818cf8">1</div>
+                    <div style="font-size:22px;font-weight:900;color:#3366FF">1</div>
                     <div style="font-size:11px;color:#64748b;margin-top:4px">invoice. all inclusive.</div>
                 </div>
                 <div class="card-hi" style="padding:16px 20px;text-align:center">
-                    <div style="font-size:22px;font-weight:900;color:#818cf8">Day 7</div>
+                    <div style="font-size:22px;font-weight:900;color:#3366FF">Day 7</div>
                     <div style="font-size:11px;color:#64748b;margin-top:4px">first code shipped</div>
                 </div>
             </div>
@@ -495,22 +494,22 @@
 
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
                 <div class="card-hi">
-                    <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:#818cf8;margin-bottom:14px">01</div>
+                    <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:#3366FF;margin-bottom:14px">01</div>
                     <div class="card-title">We build. We ship. We own it.</div>
                     <div class="card-text">Your developer builds full-time on Invigo Sentry, the planogram engine, and every feature on your roadmap. Architecture reviewed before every deploy. Working code shipped in week 1.</div>
                 </div>
                 <div class="card-hi">
-                    <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:#818cf8;margin-bottom:14px">02</div>
+                    <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:#3366FF;margin-bottom:14px">02</div>
                     <div class="card-title">We superpower the product.</div>
                     <div class="card-text">Detection accuracy. Shelf occupancy. Vending machine reliability. LUMA Shelf integrations. We focus on what Invigo needs to become the standard in retail intelligence.</div>
                 </div>
                 <div class="card-hi">
-                    <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:#818cf8;margin-bottom:14px">03</div>
+                    <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:#3366FF;margin-bottom:14px">03</div>
                     <div class="card-title">Full visibility. Always.</div>
                     <div class="card-text">When a detection model drifts, Grafana tells us. When an inference timeout spikes, Sentry pages us. Every Friday: what shipped, what's next, what's blocked.</div>
                 </div>
                 <div class="card-hi">
-                    <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:#818cf8;margin-bottom:14px">04</div>
+                    <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:#3366FF;margin-bottom:14px">04</div>
                     <div class="card-title">Your code. Your product. Always.</div>
                     <div class="card-text">Month-to-month. Cancel anytime with 30 days notice. No penalties. No exit fees. Code, docs, and IP are 100% yours.</div>
                 </div>
@@ -523,30 +522,30 @@
         <div class="slide-content" style="text-align:center;max-width:700px">
             <span class="tag tag-muted">INVIGO RETAIL</span>
             <h1 style="font-size:54px" class="gradient">Let's build<br>something big.</h1>
-            <p style="font-size:18px;color:#94a3b8;line-height:1.7;margin-bottom:48px">We already know the product. No ramp-up needed.<br>Say the word and we start next week.</p>
+            <p style="font-size:18px;color:#a3a3a3;line-height:1.7;margin-bottom:48px">We already know the product. No ramp-up needed.<br>Say the word and we start next week.</p>
 
             <div style="display:inline-grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:32px;text-align:center;margin-bottom:56px">
                 <div>
-                    <div style="font-size:32px;font-weight:900;color:#818cf8;letter-spacing:-1px">$7,550</div>
+                    <div style="font-size:32px;font-weight:900;color:#3366FF;letter-spacing:-1px">$7,550</div>
                     <div style="font-size:11px;color:#64748b;margin-top:4px">/mo, all inclusive</div>
                 </div>
                 <div>
-                    <div style="font-size:32px;font-weight:900;color:#818cf8;letter-spacing:-1px">Day 7</div>
+                    <div style="font-size:32px;font-weight:900;color:#3366FF;letter-spacing:-1px">Day 7</div>
                     <div style="font-size:11px;color:#64748b;margin-top:4px">first code deployed</div>
                 </div>
                 <div>
-                    <div style="font-size:32px;font-weight:900;color:#818cf8;letter-spacing:-1px">0</div>
+                    <div style="font-size:32px;font-weight:900;color:#3366FF;letter-spacing:-1px">0</div>
                     <div style="font-size:11px;color:#64748b;margin-top:4px">lock-in. cancel anytime.</div>
                 </div>
                 <div>
-                    <div style="font-size:32px;font-weight:900;color:#818cf8;letter-spacing:-1px">&#8734;</div>
+                    <div style="font-size:32px;font-weight:900;color:#3366FF;letter-spacing:-1px">&#8734;</div>
                     <div style="font-size:11px;color:#64748b;margin-top:4px">shelf gaps caught.</div>
                 </div>
             </div>
 
             <div style="margin-bottom:48px">
                 <p style="font-size:22px;font-weight:800;color:#fff">Alan Mac Cormack</p>
-                <p style="font-size:15px;color:#818cf8;margin-top:8px">alan@maccormack.io</p>
+                <p style="font-size:15px;color:#3366FF;margin-top:8px">alan@maccormack.io</p>
             </div>
 
             <div style="display:flex;justify-content:center;gap:32px;font-size:12px;color:#475569">
