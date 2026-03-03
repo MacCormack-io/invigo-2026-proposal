@@ -10,6 +10,19 @@
         *{margin:0;padding:0;box-sizing:border-box}
         body{font-family:'Inter',sans-serif;background:#0a0a1a;overflow:hidden;height:100vh}
 
+        /* PASSWORD GATE */
+        #gate{position:fixed;inset:0;background:#0a0a1a;z-index:1000;display:flex;align-items:center;justify-content:center}
+        #gate.hidden{display:none}
+        #gate-box{text-align:center;max-width:360px}
+        #gate-box h2{font-size:28px;font-weight:800;letter-spacing:-1px;color:#fff;margin-bottom:8px}
+        #gate-box p{font-size:14px;color:#64748b;margin-bottom:28px}
+        #gate-input{width:100%;padding:14px 20px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:10px;color:#fff;font-family:'Inter',sans-serif;font-size:15px;outline:none;text-align:center;letter-spacing:2px}
+        #gate-input:focus{border-color:#818cf8}
+        #gate-input::placeholder{color:#475569;letter-spacing:0}
+        #gate-error{font-size:12px;color:#ef4444;margin-top:12px;opacity:0;transition:opacity .2s}
+        #gate-error.show{opacity:1}
+        #gate-hint{font-size:11px;color:#334155;margin-top:20px}
+
         /* SLIDE ENGINE */
         .deck{display:flex;transition:transform .4s ease;height:100vh;width:900vw}
         .slide{width:100vw;height:100vh;flex-shrink:0;display:flex;align-items:center;justify-content:center;padding:80px 120px;background:#0a0a1a;color:#fff}
@@ -45,7 +58,16 @@
 </head>
 <body>
 
-<div class="deck" id="deck">
+<div id="gate">
+    <div id="gate-box">
+        <h2 class="gradient">Invigo Retail</h2>
+        <p>This proposal is private. Enter the password to continue.</p>
+        <input type="password" id="gate-input" placeholder="Password" autocomplete="off" autofocus>
+        <div id="gate-error">Incorrect password</div>
+    </div>
+</div>
+
+<div class="deck" id="deck" style="display:none">
 
     <!-- 1. COVER -->
     <div class="slide">
@@ -539,13 +561,45 @@
 
 </div>
 
-<div class="counter" id="counter">1 / 9</div>
-<div class="nav">
+<div class="counter" id="counter" style="display:none">1 / 9</div>
+<div class="nav" style="display:none">
     <button class="nav-btn" onclick="go(-1)">&#8592;</button>
     <button class="nav-btn" onclick="go(1)">&#8594;</button>
 </div>
 
 <script>
+// PASSWORD GATE
+const PASS='invigo2026';
+const gateEl=document.getElementById('gate');
+const gateInput=document.getElementById('gate-input');
+const gateError=document.getElementById('gate-error');
+const deckEl=document.getElementById('deck');
+const counterEl=document.getElementById('counter');
+const navEl=document.querySelector('.nav');
+
+if(sessionStorage.getItem('invigo-auth')==='true'){unlock()}
+
+gateInput.addEventListener('keydown',e=>{
+    if(e.key==='Enter'){
+        if(gateInput.value===PASS){
+            sessionStorage.setItem('invigo-auth','true');
+            unlock();
+        } else {
+            gateError.classList.add('show');
+            gateInput.value='';
+            setTimeout(()=>gateError.classList.remove('show'),2000);
+        }
+    }
+});
+
+function unlock(){
+    gateEl.classList.add('hidden');
+    deckEl.style.display='flex';
+    counterEl.style.display='';
+    navEl.style.display='';
+    go(0);
+}
+
 let current=0;const total=9;
 function go(d){
     current=Math.max(0,Math.min(total-1,current+d));
